@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Snake {
     private ArrayList<Point> body;
     private Direction direction = Direction.RIGHT;
+    private int growthCounter;
  
     {
         body = new ArrayList<>();
@@ -42,9 +43,12 @@ public class Snake {
                 break;  
                 
         }
-        body.add(0, new Point( getHead().x + x, getHead().y + y));
-        //delete tail
-        body.remove(body.size() - 1);
+        getBody().add(0, new Point( getHead().x + x, getHead().y + y));
+        if(getGrowthCounter() <= 0) {
+        getBody().remove(getBody().size() - 1);
+        } else {
+            setGrowthCounter(getGrowthCounter() - 1);
+        }
     }
     
     public Point getHead(){
@@ -77,5 +81,22 @@ public class Snake {
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    /**
+     * @return the growthCounter
+     */
+    public int getGrowthCounter() {
+        return growthCounter;
+    }
+
+    /**
+     * @param growthCounter the growthCounter to set
+     */
+    public void setGrowthCounter(int growthCounter) {
+        this.growthCounter = growthCounter;
+    }
+    public void grow(int growth) {
+        this.growthCounter += growth;
     }
 }
